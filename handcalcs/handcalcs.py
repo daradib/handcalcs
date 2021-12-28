@@ -1641,7 +1641,8 @@ def test_for_small_float(elem: Any, precision: int) -> bool:
 
     if not isinstance(elem, (float)):
         return False
-    if elem == 0:
+    if abs(elem) < 1e-8:
+        # Extremely small floats are likely floating point error.
         return False
     elem_as_str = str(round(abs(elem), precision))
     if "e" in str(elem):
